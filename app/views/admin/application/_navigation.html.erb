@@ -22,4 +22,5 @@ as defined by the routes in the `admin/` namespace
       class: "navigation__link navigation__link--#{nav_link_state(resource)}"
     ) if valid_action?(:index, resource) && show_action?(:index, model_from_resource(resource)) %>
   <% end %>
+  <%= link_to "Add Post", new_post_url, class: "navigation__link" %>
 </nav>

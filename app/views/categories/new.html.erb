@@ -1,0 +1,12 @@
+<div class="container px-4 mx-auto my-8">
+  <div class="max-w-3xl mx-auto">
+    <div class="flex items-center justify-between mb-4">
+      <h1 class="h3"><%= t("shared.scaffold.new.title", model: "Category") %></h1>
+      <%= link_to t("cancel"), categories_path, class: "btn btn-link" %>
+    </div>
+
+    <div class="p-8 bg-white rounded shadow">
+      <%= render "form", category: @category %>
+    </div>
+  </div>
+</div>

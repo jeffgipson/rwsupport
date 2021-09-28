@@ -1,0 +1,15 @@
+<div class="container px-4 mx-auto my-8">
+  <div class="max-w-3xl mx-auto">
+    <div class="flex items-center justify-between mb-4">
+      <h1 class="h3"><%= link_to "Categories", categories_path %> > Category #<%= @category.id %></h1>
+      <%= link_to t("edit"), edit_category_path(@category), class: "btn btn-link" %>
+    </div>
+
+    <div class="p-8 bg-white rounded shadow">
+      <div class="mb-4">
+        <h5>Title</h5>
+        <%= @category.title %>
+      </div>
+    </div>
+  </div>
+</div>

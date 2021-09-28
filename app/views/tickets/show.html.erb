@@ -1,0 +1,31 @@
+<div class="container px-4 mx-auto my-8">
+  <div class="max-w-3xl mx-auto">
+    <div class="flex items-center justify-between mb-4">
+      <h1 class="h3"><%= link_to "Tickets", tickets_path %> > Ticket #<%= @ticket.id %></h1>
+      <%= link_to t("edit"), edit_ticket_path(@ticket), class: "btn btn-link" %>
+    </div>
+
+    <div class="p-8 bg-white rounded shadow">
+      <div class="mb-4">
+        <h5>Title</h5>
+        <%= @ticket.title %>
+      </div>
+      <div class="mb-4">
+        <h5>Body</h5>
+        <%= @ticket.body %>
+      </div>
+      <div class="mb-4">
+        <h5>Image</h5>
+        <%= @ticket.image %>
+      </div>
+      <div class="mb-4">
+        <h5>User</h5>
+        <%= @ticket.user %>
+      </div>
+      <div class="mb-4">
+        <h5>Status</h5>
+        <%= @ticket.status %>
+      </div>
+    </div>
+  </div>
+</div>

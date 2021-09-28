@@ -1,0 +1,15 @@
+--- !ruby/object:Jumpstart::Configuration
+application_name: Support
+business_name: Support Application
+domain: example.com
+support_email: jeff@recruiterswebsites.com
+default_from_email: Jumpstart <support@example.com>
+business_address: "2530 Marsha Kay Dr\r\nCape Girardeau, Mo 63701"
+background_job_processor: async
+email_provider: ''
+personal_accounts: false
+livereload: false
+solargraph: false
+register_with_account: false
+multitenancy:
+- subdomain
