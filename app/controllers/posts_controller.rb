@@ -18,6 +18,18 @@ class PostsController < ApplicationController
     if params[:category_id]
       @posts = Post.where(category_id: params[:category_id])
     end
+
+    @favposts = current_user.fav_posts
+  end
+
+  def fav
+      current_user.fav_posts.push(params[:id])
+      current_user.save(validate: false)
+  end
+
+  def fav_remove
+    current_user.fav_posts.delete(params[:id])
+    current_user.save(validate: false)
   end
 
   # GET /posts/1 or /posts/1.json

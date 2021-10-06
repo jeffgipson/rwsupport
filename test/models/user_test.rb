@@ -12,6 +12,7 @@
 #  confirmed_at           :datetime
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
+#  fav_posts              :text             default([]), is an Array
 #  first_name             :string
 #  invitation_accepted_at :datetime
 #  invitation_created_at  :datetime
