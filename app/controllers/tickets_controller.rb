@@ -42,6 +42,7 @@ class TicketsController < ApplicationController
 
     respond_to do |format|
       if @ticket.save
+        TicketMailer.with(ticket: @ticket).new_ticket.deliver_now
         format.html { redirect_to @ticket, notice: "Ticket was successfully created." }
         format.json { render :show, status: :created, location: @ticket }
       else

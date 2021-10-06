@@ -5,27 +5,38 @@
       <%= link_to t("edit"), edit_ticket_path(@ticket), class: "btn btn-link" %>
     </div>
 
-    <div class="p-8 bg-white rounded shadow">
+    <div class="mb-4">
+      <h4><%= @ticket.title %></h4>
+    </div>
+
+
+   <div class="p-8 bg-white rounded shadow">
+
       <div class="mb-4">
-        <h5>Title</h5>
-        <%= @ticket.title %>
-      </div>
-      <div class="mb-4">
-        <h5>Body</h5>
         <%= @ticket.body %>
       </div>
-      <div class="mb-4">
-        <h5>Image</h5>
-        <%= @ticket.image %>
-      </div>
-      <div class="mb-4">
-        <h5>User</h5>
-        <%= @ticket.user %>
-      </div>
-      <div class="mb-4">
-        <h5>Status</h5>
-        <%= @ticket.status %>
-      </div>
+      <% Response.where(ticket_id:1).each do |response| %>
+       <% if current_user.id == response.user_id %>
+         <% position = '' %>
+       <% else %>
+         <% position = 'float-right' %>
+       <% end %>
+       <div onclick="test(this)" class="mb-4 <%=position %>">
+       <%= response.title %>
+          <%= link_to "View Details", response, class: "btn btn-link no-underline" %>
+        </div>
+      <% end %>
+
+
     </div>
   </div>
 </div>
+
+
+<script>
+
+  function test(test){
+      test.style.display = "none";
+  }
+
+</script>
