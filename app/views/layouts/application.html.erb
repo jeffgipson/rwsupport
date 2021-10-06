@@ -14,15 +14,16 @@
 
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
     <%= stylesheet_link_tag "application", media: "all", "data-turbo-track": "reload" %>
-
+    <script src="https://kit.fontawesome.com/3ed505ad36.js" crossorigin="anonymous"></script>
     <%# Be sure to add your own custom favicons %>
     <%= render "shared/favicons" %>
     <%= render "shared/payments_dependencies" %>
 
     <%# Replace this with your FontAwesome Pro Kit code %>
-    <script src="https://kit.fontawesome.com/0e5ab6a736.js"></script>
+    <script src="https://kit.fontawesome.com/82cdb6ae7f.js" crossorigin="anonymous"></script>
 
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
     <%= yield :head %>
   </head>

@@ -136,4 +136,8 @@ Rails.application.routes.draw do
 
   # Public marketing homepage
   root to: "static#index"
+
+
+  get '/post/:id/fav', to: 'posts#fav'
+  get '/post/:id/fav_remove', to: 'posts#fav_remove'
 end

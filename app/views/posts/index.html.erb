@@ -33,6 +33,7 @@
               <div class="flex-shrink-0">
                 <img class="h-48 w-full object-cover" src="<%= url_for(post.image) %>" alt="">
               </div>
+
               <div class="flex-1 bg-white p-6 flex flex-col justify-between">
                 <div class="flex-1">
                   <p class="text-sm font-medium text-indigo-600">
@@ -50,32 +51,16 @@
                   </a>
                 </div>
                 <div class="mt-6 flex items-center">
-<!--                  <div class="flex-shrink-0">-->
-<!--                    <a href="#">-->
-<!--                      <span class="sr-only">Roel Aufderehar</span>-->
-<!--                      <img class="h-10 w-10 rounded-full" src="" alt="">-->
-<!--                    </a>-->
-<!--                  </div>-->
-<!--                  <div class="ml-3">-->
-<!--                    <p class="text-sm font-medium text-gray-900">-->
-<!--                      <a href="#" class="hover:underline">-->
-<!--                        Roel Aufderehar-->
-<!--                      </a>-->
-<!--                    </p>-->
-<!--                    <div class="flex space-x-1 text-sm text-gray-500">-->
-<!--                      <time datetime="2020-03-16">-->
-<!--                        Mar 16, 2020-->
-<!--                      </time>-->
-<!--                      <span aria-hidden="true">-->
-<!--                  &middot;-->
-<!--                </span>-->
-<!--                      <span>-->
-<!--                  6 min read-->
-<!--                </span>-->
-<!--                    </div>-->
-<!--                  </div>-->
                 <%= link_to 'Read More', post, class: "btn btn-link no-underline" %>
                 </div>
+                <span>
+                <%if @favposts.include?(post.id.to_s) %>
+                  <i class="heart-icon fas fa-star float-right" onclick="getIdRemove(<%= post.id %>,this)"></i>
+                  <% else %>
+                  <i class="heart-icon far fa-star float-right" onclick="getIdAdd(<%= post.id %>,this)"></i>
+                <% end %>
+               </span>
+
               </div>
 
             </div>
@@ -105,7 +90,25 @@
       </div>
     </div>
   <% end %>
+
 </div>
+
+  <script>
+      function getIdAdd(id,current_item) {
+          console.log('Adding')
+          $(current_item).toggleClass('fas far');
+          $.get( "/post/"+id+"/fav", function(data) {
+          });
+      }
+      function getIdRemove(id,current_item) {
+          console.log('Removing')
+          $(current_item).toggleClass('fas far');
+          $.get( "/post/"+id+"/fav_remove", function(data) {
+          });
+      }
+
+
+  </script>
 
 
 
