@@ -12,31 +12,140 @@
 
    <div class="p-8 bg-white rounded shadow">
 
-      <div class="mb-4">
+      <div class="mb-4 sender_message">
+        <%= image_tag avatar_url_for(User.find(@ticket.id)), class: "h-5 w-5 rounded-full inline-block mr-1" %><%= User.find(@ticket.id).name %>
         <%= @ticket.body %>
       </div>
-      <% Response.where(ticket_id:1).each do |response| %>
+      <% Response.where(ticket_id:params[:id]).each do |response| %>
        <% if current_user.id == response.user_id %>
-         <% position = '' %>
+         <% position = 'sender_message' %>
        <% else %>
-         <% position = 'float-right' %>
+         <% position = 'reply_message' %>
        <% end %>
-       <div onclick="test(this)" class="mb-4 <%=position %>">
-       <%= response.title %>
-          <%= link_to "View Details", response, class: "btn btn-link no-underline" %>
+       <div class="mb-4">
+         <div class="<%=position %>">
+         <%= image_tag avatar_url_for(User.find(response.user_id)), class: "h-5 w-5 rounded-full inline-block mr-1" %><%= User.find(response.user_id).name %>
+<!--         <div><%#= response.title %></div>-->
+
+         <div><%= response.body %></div>
+         </div>
+         <%#= link_to "View Details", response, class: "btn btn-link no-underline" %>
+       </div>
+      <% end %>
+     <div style="clear:both;"></div>
+    </div>
+
+    <br>
+
+    <div class="p-8 bg-white rounded shadow">
+      <%= form_with(model: @response) do |form| %>
+        <%= render "shared/error_messages", resource: form.object %>
+
+        <div style="display: none" class="form-group">
+          <%= form.label :title %>
+          <%= form.text_field :title, class: "form-control", value: @ticket.title  %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :Response %>
+          <%= form.rich_text_area :body, data: { controller: "mentions", mentions_target: "field" } %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :Screen_Shot %>
+          <%= form.file_field :image, class: "form-control" %>
+        </div>
+
+        <div style="display: none" class="form-group">
+          <%= form.label :user_id %>
+          <%= form.text_field :user_id, class: "form-control", value: current_user.id  %>
+        </div>
+
+        <div style="display: none" class="form-group">
+          <%= form.label :ticket_id %>
+          <%= form.text_field :ticket_id, class: "form-control", value: params[:id]  %>
+        </div>
+
+        <div class="flex justify-between form-group">
+          <%= form.button class: "btn btn-primary" %>
+
+          <% if form.object.persisted? %>
+            <%= link_to t("delete"), form.object, class: "btn btn-danger outline", method: :delete, data: { confirm: t("are_you_sure") } %>
+          <% end %>
+          <div style="clear:both;"></div>
         </div>
       <% end %>
-
-
     </div>
+
+
   </div>
 </div>
+<style>
 
-
-<script>
-
-  function test(test){
-      test.style.display = "none";
+  .sender_message {
+    background: #dddddd;
+    padding: 20px;
+    border-radius: 15px;
+    width: 80% ;
+    position: relative;
   }
 
-</script>
+
+  .sender_message::before {
+    border-bottom-right-radius: 0.8rem 0.7rem;
+    border-left: 1rem solid #dddddd;
+    left: -7px;
+    transform: translate(0, -0.1rem);
+    position: absolute;
+    content: '';
+    bottom: -10px;
+    height: 20px;
+  }
+
+  .sender_message::after {
+    background-color: #fff;
+    border-bottom-right-radius: 0.5rem;
+    left: 20px;
+    transform: translate(-30px, -2px);
+    width: 10px;
+    position: absolute;
+    content: '';
+    bottom: -10px;
+    height: 20px;
+  }
+
+
+  .reply_message {
+    background: #248bf5;
+    padding: 20px;
+    border-radius: 15px;
+    color:white;
+    position: relative;
+    float: right;
+    width: 80% ;
+  }
+
+  .reply_message::before {
+    border-bottom-left-radius: 0.8rem 0.7rem;
+    border-right: 1rem solid #248bf5;
+    right: -5px;
+    transform: translate(0, -0.1rem);
+    position: absolute;
+    content: '';
+    bottom: -10px;
+    height: 20px;
+  }
+
+  .reply_message::after {
+    background-color: #fff;
+    border-bottom-left-radius: 0.5rem;
+    right: -40px;
+    transform: translate(-30px, -2px);
+    width: 10px;
+    position: absolute;
+    content: '';
+    bottom: -10px;
+    height: 20px;
+  }
+
+</style>

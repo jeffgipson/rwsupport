@@ -19,6 +19,7 @@ class TicketsController < ApplicationController
 
   # GET /tickets/1 or /tickets/1.json
   def show
+    @response = Response.new
   end
 
   # GET /tickets/new

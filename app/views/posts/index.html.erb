@@ -55,9 +55,11 @@
                 </div>
                 <span>
                 <%if @favposts.include?(post.id.to_s) %>
-                  <i class="heart-icon fas fa-star float-right" onclick="getIdRemove(<%= post.id %>,this)"></i>
+                    <i  id="remove_<%=post.id%>" class="add_fav heart-icon fas fa-star float-right" onclick="getIdRemove(<%= post.id %>,this)"></i>
+                    <i  id="add_<%=post.id%>" style="display: none" class="remove_fav heart-icon far fa-star float-right" onclick="getIdAdd(<%= post.id %>,this)"></i>
                   <% else %>
-                  <i class="heart-icon far fa-star float-right" onclick="getIdAdd(<%= post.id %>,this)"></i>
+                    <i id="remove_<%=post.id%>" style="display: none" class="add_fav heart-icon fas fa-star float-right" onclick="getIdRemove(<%= post.id %>,this)"></i>
+                    <i id="add_<%=post.id%>" class="remove_fav heart-icon far fa-star float-right" onclick="getIdAdd(<%= post.id %>,this)"></i>
                 <% end %>
                </span>
 
@@ -96,13 +98,15 @@
   <script>
       function getIdAdd(id,current_item) {
           console.log('Adding')
-          $(current_item).toggleClass('fas far');
+          $('#add_'+id).hide()
+          $('#remove_'+id).show()
           $.get( "/post/"+id+"/fav", function(data) {
           });
       }
       function getIdRemove(id,current_item) {
           console.log('Removing')
-          $(current_item).toggleClass('fas far');
+          $('#remove_'+id).hide()
+          $('#add_'+id).show()
           $.get( "/post/"+id+"/fav_remove", function(data) {
           });
       }
