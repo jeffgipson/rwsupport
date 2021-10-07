@@ -12,10 +12,16 @@
 
    <div class="p-8 bg-white rounded shadow">
 
-      <div class="mb-4 sender_message">
+      <div class="mb-4">
+        <div class="sender_message">
         <%= image_tag avatar_url_for(User.find(@ticket.id)), class: "h-5 w-5 rounded-full inline-block mr-1" %><%= User.find(@ticket.id).name %>
         <%= @ticket.body %>
+          <% unless @ticket.image.blank? %>
+            <img class="h-48 w-full object-cover" src="<%= url_for(@ticket.image) %>" alt="screenshot">
+          <% end %>
       </div>
+      </div>
+
       <% Response.where(ticket_id:params[:id]).each do |response| %>
        <% if current_user.id == response.user_id %>
          <% position = 'sender_message' %>
@@ -28,6 +34,9 @@
 <!--         <div><%#= response.title %></div>-->
 
          <div><%= response.body %></div>
+           <% unless response.image.blank? %>
+           <img class="h-48 w-full object-cover" src="<%= url_for(response.image) %>" alt="screenshot">
+           <% end %>
          </div>
          <%#= link_to "View Details", response, class: "btn btn-link no-underline" %>
        </div>
@@ -121,8 +130,8 @@
     border-radius: 15px;
     color:white;
     position: relative;
-    float: right;
     width: 80% ;
+    margin-left: auto;
   }
 
   .reply_message::before {
