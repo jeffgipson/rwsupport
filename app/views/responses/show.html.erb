@@ -20,12 +20,17 @@
       </div>
       <div class="mb-4">
         <h5>User</h5>
-        <%= @response.user %>
+        <%= @response.user_id %>
       </div>
       <div class="mb-4">
-        <h5>Ticket</h5>
-        <%= @response.ticket %>
+        <h5>Ticket Owner</h5>
+        <%= @response.ticket_owner %>
       </div>
+      <div class="mb-4">
+        <h5>Ticket Id</h5>
+        <%= @response.ticket_id %>
+      </div>
+
     </div>
   </div>
 </div>

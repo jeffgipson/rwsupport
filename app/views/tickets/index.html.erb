@@ -1,6 +1,6 @@
 <div class="container px-4 mx-auto my-8">
   <div class="flex items-center justify-between mb-4">
-    <h1 class="h3">Tickets</h1>
+    <h1 class="h3">My Tickets</h1>
 
     <% if @tickets.any? %>
       <%= link_to t("shared.scaffold.new.title", model: "Ticket"), new_ticket_path, class: "btn btn-primary" %>
@@ -12,10 +12,9 @@
       <table class="table">
         <thead>
           <tr>
-            <th class="p-3 text-xs text-left uppercase"><%= sortable @tickets, :title, "Title", class: "text-gray-700" %></th>
-            <th class="p-3 text-xs text-left uppercase"><%= sortable @tickets, :body, "Body", class: "text-gray-700" %></th>
-            <th class="p-3 text-xs text-left uppercase"><%= sortable @tickets, :image, "Image", class: "text-gray-700" %></th>
-            <th class="p-3 text-xs text-left uppercase"><%= sortable @tickets, :user_id, "User", class: "text-gray-700" %></th>
+            <th class="p-3 text-xs text-left uppercase"><%= sortable @tickets, :title, "Issue", class: "text-gray-700" %></th>
+            <th class="p-3 text-xs text-left uppercase"><%= sortable @tickets, :body, "Details", class: "text-gray-700" %></th>
+<!--            <th class="p-3 text-xs text-left uppercase"><%#= sortable @tickets, :user_id, "User", class: "text-gray-700" %></th>-->
             <th class="p-3 text-xs text-left uppercase"><%= sortable @tickets, :status, "Status", class: "text-gray-700" %></th>
             <th class="w-20 p-3 text-xs text-left text-gray-700 uppercase"><%= t("shared.scaffold.actions") %></th>
           </tr>
@@ -25,9 +24,8 @@
         <% @tickets.each do |ticket| %>
           <tr class="border-t border-gray-400 group hover:bg-gray-100">
             <td class="p-3"><%= ticket.title %></td>
-            <td class="p-3"><%= ticket.body %></td>
-            <td class="p-3"><%= ticket.image %></td>
-            <td class="p-3"><%= ticket.user_id %></td>
+            <td class="p-3"><%= ticket.body.to_plain_text[0..70] %>...</td>
+<!--            <td class="p-3"><%#= User.find(ticket.user_id).name %></td>-->
             <td class="p-3"><%= ticket.status %></td>
 
             <td>

@@ -2,12 +2,13 @@
 #
 # Table name: responses
 #
-#  id         :bigint           not null, primary key
-#  title      :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  ticket_id  :bigint           not null
-#  user_id    :bigint           not null
+#  id           :bigint           not null, primary key
+#  ticket_owner :string
+#  title        :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  ticket_id    :bigint           not null
+#  user_id      :bigint           not null
 #
 # Indexes
 #

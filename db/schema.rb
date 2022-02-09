@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_06_143704) do
+ActiveRecord::Schema.define(version: 2021_10_08_204928) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -252,6 +252,7 @@ ActiveRecord::Schema.define(version: 2021_10_06_143704) do
     t.bigint "ticket_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "ticket_owner"
     t.index ["ticket_id"], name: "index_responses_on_ticket_id"
     t.index ["user_id"], name: "index_responses_on_user_id"
   end
@@ -262,6 +263,7 @@ ActiveRecord::Schema.define(version: 2021_10_06_143704) do
     t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "support_rep"
     t.index ["user_id"], name: "index_tickets_on_user_id"
   end
 
